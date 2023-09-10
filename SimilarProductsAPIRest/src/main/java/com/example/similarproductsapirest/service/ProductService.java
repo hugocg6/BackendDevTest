@@ -1,10 +1,12 @@
 package com.example.similarproductsapirest.service;
 
-import com.example.similarproductsapirest.dto.ProductDTO;
+import com.example.similarproductsapirest.dto.ProductDetailDTO;
+import com.example.similarproductsapirest.dto.SimilarProductsDTO;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ProductService {
 
-    List<ProductDTO> findProductsById(String id);
+    ProductDetailDTO getProductProductId(String productId);
+    SimilarProductsDTO getProductSimilarIds(String productId);
 }
