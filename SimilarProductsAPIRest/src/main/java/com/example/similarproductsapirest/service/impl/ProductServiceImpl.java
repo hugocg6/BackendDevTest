@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public SimilarProductsDTO getProductSimilarids(String productId) {
+    public SimilarProductsDTO getProductSimilarIds(String productId) {
         String similarIdsUrl = BASE_URL + "/product/" + productId + "/similarids";
         return restTemplate.getForObject(similarIdsUrl, SimilarProductsDTO.class);
     }
