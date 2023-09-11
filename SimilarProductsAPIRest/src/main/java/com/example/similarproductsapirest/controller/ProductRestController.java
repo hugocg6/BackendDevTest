@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/product")
 public class ProductRestController {
@@ -22,12 +25,15 @@ public class ProductRestController {
     }
 
     @GetMapping("/{productId}/similar")
-    public ResponseEntity<SimilarProductsDTO> getSimilarProducts(@PathVariable String productId) {
+    public ResponseEntity<List<ProductDetailDTO>> getSimilarProducts(@PathVariable String productId) {
         try {
-            SimilarProductsDTO similarProducts = productService.getProductSimilarIds(productId);
+            SimilarProductsDTO similarProductsIds = productService.getProductSimilarIds(productId);
 
-            for (String similarProductId : similarProducts.getSimilarProductsId()) {
+            List<ProductDetailDTO> similarProducts = new ArrayList<>();
+
+            for (String similarProductId : similarProductsIds.getSimilarProductsId()) {
                 ProductDetailDTO productDetail = productService.getProductProductId(similarProductId);
+                similarProducts.add(productDetail);
             }
 
             return ResponseEntity.ok(similarProducts);
